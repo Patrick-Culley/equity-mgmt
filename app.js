@@ -1,12 +1,3 @@
-/* 
-Citation Scope: Creatuing and executing all queries/operations and routes 
-Date: 3/9/2023
-Originality: Adapted from all steps found in node-practice-app module. Uses different queries,
-              routes, and object/variable names. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app
-Note: Individual citations are included under each route 
-*/
-
 // Setup express and AJAX for routing 
 // Use Express framework for creating object for routing 
 var express = require('express');    
@@ -19,12 +10,6 @@ app.use(express.static('public'))
 PORT = 2466;       
 
 // ------------------ SETUP HANDLEBARS ENGINE ------------------------------------// 
-/* 
-Citation Scope: Setting up Handlebars engine for templating 
-Date: 3/9/2023
-Originality: Copied from step 3   
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');      
 app.engine('.hbs', engine({extname: ".hbs"}));   
@@ -43,12 +28,6 @@ app.get('/', function(req, res)
     });
 
 // ----------------------- CUSTOMERS PAGE ----------------------------------------//
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different table and route name. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Use SELECT to query and display all customers from the Customers entity 
 app.get('/customers', function(req, res)
     {  
@@ -60,12 +39,6 @@ app.get('/customers', function(req, res)
         })                                                       
     });                                                        
 
-/* 
-Citation Scope: Adding new data 
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Uses nested queries - one for INSERT to insert new customer, and one for SELECT to display all Customers after INSERT
 app.post('/add-customer', function(req, res) 
 {
@@ -96,12 +69,7 @@ app.post('/add-customer', function(req, res)
         }
     })  
 });
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
+
 // DELETE Customer from Customers table - Uses single DELETE query 
 app.delete('/delete-customer/', function(req, res, next)
 {
@@ -121,12 +89,7 @@ app.delete('/delete-customer/', function(req, res, next)
         }
     })
 });
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 // Route to UPDATE Customer --------//
 // Update customer address, email, and balance using UPDATE and SELECT on the Customers table 
 app.put('/update-customer/', function(req, res, next){
@@ -165,12 +128,7 @@ app.put('/update-customer/', function(req, res, next){
     });
 
 // ----------------------- STOCK ORDERS PAGE --------------------------------------------//
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different table and attribute names and more queries. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
+
 // Route for stock orders - uses 4 queries to obtain the customer, vendor, and stock order data
 app.get('/stock-orders', function(req, res, )
     {
@@ -199,12 +157,6 @@ app.get('/stock-orders', function(req, res, )
         })
 });
 
-/* 
-Citation Scope: Adding new data 
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Add to Stock Order - uses nested INSERT and SELECT queries on StockOrders 
 app.post('/add-stock-order', function(req, res)
     {
@@ -240,12 +192,7 @@ app.post('/add-stock-order', function(req, res)
             }
         });
 })
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
+
 // Route to DELETE Stock Order --------//
 app.delete('/delete-stock-order', function(req, res, next)
 {
@@ -267,12 +214,7 @@ app.delete('/delete-stock-order', function(req, res, next)
         }
     })}
 )
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 // Route to UPDATE Stock Order --------//
 // Uses nested queries; one UPDATE and SELECT to display data 
 app.put('/update-stock-order/', function(req, res, next){
@@ -315,12 +257,7 @@ app.put('/update-stock-order/', function(req, res, next){
 });
 
 // ----------------------- BLOTTERS REPORT PAGE --------------------------------------------//
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different table and attribute names and different queries. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
+
 // Uses nested SELECT queries: Blotters & StockOrders is called 
 app.get('/blotters', function(req, res, )
     {
@@ -336,12 +273,6 @@ app.get('/blotters', function(req, res, )
         }) 
 })});
 
-/* 
-Citation Scope: Adding new data 
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and route/variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Uses nested SELECT and INSERT queries: Blotters entity is only used 
 app.post('/add-blotter', function(req, res) 
 {
@@ -374,12 +305,6 @@ app.post('/add-blotter', function(req, res)
             }
 })}})});
 
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
 // Uses DELETE On Blotters entity 
 app.delete('/delete-blotter-ajax', function(req,res,next){
     // Capture the request body and assign to JS object 
@@ -401,12 +326,6 @@ app.delete('/delete-blotter-ajax', function(req,res,next){
     })
 });
 
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
 // Uses UPDATE on Blotters entity-----//
 app.put('/update-blotters', function(req, res, next){
 // Assign request body to JS object 'data' 
@@ -444,12 +363,6 @@ db.pool.query(queryUpdate, [settle_date, trade_type, fees, net_proceed, report_i
 });});
 
 // ----------------------- VENDOR BROKERS PAGE --------------------------------------------// 
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different route, table, and variable names. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Uses single SELECT query  
 app.get('/vendors', function(req, res)
     {
@@ -459,12 +372,6 @@ app.get('/vendors', function(req, res)
         })                                                      
 });    
 
-/* 
-Citation Scope: Adding new data to DB
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and route/variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Uses two nested INSERT and SELECT queries on the VendorBrokers entity 
 app.post('/add-vendor-ajax', function(req, res) 
 {
@@ -500,12 +407,6 @@ app.post('/add-vendor-ajax', function(req, res)
                 }
  })}})});
 
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
 // Uses single DELETE query on the VendorBrokers entity 
 app.delete('/delete-vendor-ajax', function(req,res,next){
        
@@ -525,12 +426,7 @@ app.delete('/delete-vendor-ajax', function(req,res,next){
                 }
         })
 });
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 // Uses two nested UPDATE and SELECT queries on the VendorBrokers entity 
 app.put('/put-vendor-ajax', function(req,res,next){
     // Assign request body to JS object 
@@ -565,12 +461,6 @@ app.put('/put-vendor-ajax', function(req,res,next){
 })});
 
 // --------------------------- STOCKS PAGE -------------------------------------------------------
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different route, table, and variable names. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Uses a single SELECT query on the Stocks entity 
 app.get('/stocks', function(req, res)
     {
@@ -588,12 +478,7 @@ app.get('/stocks', function(req, res)
         })                 
     }
 );
-/* 
-Citation Scope: Adding new data to DB
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and route/variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
+
 // Uses two nested INSERT and SELECT queries to add to Stocks entity 
 app.post('/add-stock-to-stocks', function(req, res)
     {
@@ -625,12 +510,7 @@ app.post('/add-stock-to-stocks', function(req, res)
         })
     }
 )
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
+
 // Uses a single DELETE query on the Stocks entity  
 app.delete('/delete-stock-from-stocks', function(req, res){
     // Assign request body to JS object 
@@ -648,12 +528,7 @@ app.delete('/delete-stock-from-stocks', function(req, res){
         }
     })
 })
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 app.put('/update-stock-from-stocks', function(req, res, next){
     // Assign request body to JS object 'data' 
     let data = req.body;
@@ -676,12 +551,7 @@ app.put('/update-stock-from-stocks', function(req, res, next){
 })
 
 // --------------------------- EMPLOYEES PAGE ---------------------------------------
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different route, table, attribute, and variable names. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
+
 app.get('/employees', function(req, res)
 {
     // Declare Query 1 to be assigned below
@@ -700,12 +570,6 @@ app.get('/employees', function(req, res)
 
 
 app.post('/add-employee-ajax', function(req, res) 
-/* 
-Citation Scope: Adding new data to DB
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and route/variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 {
     // Assign request body to JS object 
     let data = req.body;
@@ -745,12 +609,6 @@ Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%2
                 }
             })}})});
 
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
 app.delete('/delete-employee-ajax', function(req,res,next){
     // Assign request body to JS object 'data'
     let data = req.body;
@@ -769,12 +627,7 @@ app.delete('/delete-employee-ajax', function(req,res,next){
         else {res.sendStatus(204);
     }})
 });
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 app.put('/put-employee-ajax', function(req,res,next){
     // Assign request body containing values to JS object 
     let data = req.body;      
@@ -808,12 +661,6 @@ app.put('/put-employee-ajax', function(req,res,next){
         })});
 
 // --------------------------- EMPLOYEES HAS BLOTTERS TABLE ROUTE ------------------------------------
-/* 
-Citation Scope: Dynamically displaying data 
-Date: 3/9/2023
-Originality: Adapted from step 4 using different queryies and route, table, attribute, and variable names. 
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
 // Route for EmployeesHasBlotters - uses SELECT to disply all employees
 app.get('/employees_blotters', function(req, res)
     {
@@ -839,12 +686,7 @@ app.get('/employees_blotters', function(req, res)
                 })
             })
     });
-/* 
-Citation Scope: Adding new data to DB
-Date: 3/9/2023
-Originality: Adapted from step 5 of 'Adding New Data'. Changed query specifics and route/variable/attribute names
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
-*/
+
 app.post('/add-employees_blotters', function(req, res){
     let data = req.body;
     let employee_id = data.employee_id
@@ -872,12 +714,7 @@ app.post('/add-employees_blotters', function(req, res){
         }
     })
 });
-/* 
-Citation Scope: Creating a delete route 
-Date: 3/9/2023
-Originality: Adapted from step 7 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
-*/
+
 app.delete('/deleteEmployeeBlotter', function(req,res){
     // Assign request body to JS object 'data'
     let data = req.body;
@@ -896,12 +733,7 @@ app.delete('/deleteEmployeeBlotter', function(req,res){
         }
     })
 });
-/* 
-Citation Scope: Creating an update route 
-Date: 3/9/2023
-Originality: Adapted from step 8 using different route, variable, and object names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 app.put('/updateEmployeeBlotter', function(req, res, next){
     // Save request body to JS object to be passed 
     let data = req.body
