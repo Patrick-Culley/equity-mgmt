@@ -1,0 +1,98 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2023--}}
+{{! -- Originality: Adapted using different attributes & variable names --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+<h1>Customers</h1>
+<h4>View all active Customers. Add, Update, and Delete Customers</h4>
+{{! ------------------ DISPLAY TABLE OF CUSTOMERS ------------------------------}}
+<table id="people-table">
+    <thead>
+        {{!-- Hardcode names as headers for the table  --}}
+        <tr>
+          <th>Customer&nbspID</th>  
+            <th>First&nbspName</th>
+            <th>Last&nbspName</th>
+            <th>Email</th>
+            <th style="padding-right: 100px;">Address</th>
+            <th>Balance</th>
+            <th>Delete</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Print customer id, first & last name, email, address, and balance for each row --}}
+        {{#each data}}
+        <tr data-value={{this.cust_id}}>
+            <td>{{this.cust_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.address}}</td>
+            <td>{{this.balance}}</td>
+            <td><button id="button" onclick="deletePerson({{this.cust_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{! ------------------ FORM TO ADD CUSTOMERS ------------------------------}}
+{{!-- Form to add Customer to Customers Table--}}
+<div class="divs" id="div1">
+<h4 style="font-weight: normal;"><strong style="font-size: 18px;">Add Customer: </strong>To add a new customer, <br>enter their information below and click 'Submit'
+<br><br><strong>Note:</strong> Fields with an *asterik are required</h4>
+<form id="add-customer">
+    </select>
+    <label for="fname">First Name: </label>
+    <br>
+    <input type="text" name="fname" id="fname" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="lname">Last Name: 
+    <br>
+    <input type="text" name="lname" id="lname" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="email">Email: </label>
+    <br>
+    <input type="text" name="email" id="email" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="address">Address: </label>
+    <br>
+    <input type="text" name="address" id="address" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="balance">Balance: </label>
+    <br>
+    <input type="number" name="balance" id="balance" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <input type="submit">
+    <br><br>
+</form>
+</div>
+{{! ------------------ FORM TO UPDATE CUSTOMERS ------------------------------}}
+{{!-- Form to update Customer from Customers Table--}}
+<div class="divs" id="div2">
+<h4 style="font-weight: normal;"><strong style="font-size: 20px;">Update Customer: </strong>To update customer <br>, enter their information below and click 'Submit'</h4>
+<strong>Note:</strong> Fields with an *asterik are required</h4>
+<br><br>
+<form id="update-customer">
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Customer</option>
+        {{! --- Dropdown lets user choose fromm customer name}}
+        {{#each data}}
+        <option value="{{this.cust_id}}">{{this.first_name}} {{this.last_name}}</option>
+        {{/each}}
+    </select>
+    <br><br>
+    {{!-- Remaining form data gather text boxes ------}}
+    {{!-- Can update email, address, and balance -----}}
+    <label for="updateEmail">Email: </label><br>
+    <input type="text" name="email" id="updateEmail"><span style="padding-left: 5px">*</span><br><br>
+    <label for="updateAddress">Address: </label><br>
+    <input type="text" name="address" id="updateAddress"><span style="padding-left: 5px">*</span><br><br>
+    <label for="updateBalance">Balance: </label><br>
+    <input type="number" name="balance" id="updateBalance"><span style="padding-left: 5px">*</span><br><br>
+    <input type="submit"><br><br>
+</form>
+</div>
+<script src="./js/add_customer.js"></script>
+<script src="./js/delete_customer.js"></script>
+<script src="./js/update_customer.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

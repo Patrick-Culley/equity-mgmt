@@ -1,0 +1,103 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2023--}}
+{{! -- Originality: Adapted using different attributes & variable names --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <h1>Employee Blotter Assignments</h1>
+    <h3 style="font-size: 16px;">Here you may create new assignments in order 
+        to assign<br> employees to blotters for analysis. To add, update, or delete
+        choose from the below <br>options.</h3>
+    <h4>*Note: <span style="font-weight: normal;">You may update reports to have no employees assigned. If an employee
+        <br>is no longer employed or a report completed/deleted, the assignment record will be removed.
+    </span></h4>
+{{! ------------------ TABLE TO DISPLAY EMPLOYEE BLOTTER ASSIGNMENTS ------------------------------}}
+<table id="employee-blotter-table">
+    <thead>
+        {{!-- Hardcode reader friendly names as headers for the table  --}}
+        <tr>
+            <th>Assignment&nbspID</th>
+            <th>Blotter&nbspID</th>
+            <th>Employee&nbspFirst&nbspName</th>
+            <th>Employee&nbspLast&nbspName</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Return blotter assignment attributes for each row of the table --}}
+        {{#each data}}
+        <tr data-value={{this.employee_report_id}}>
+            <td>{{this.employee_report_id}}</td>
+            <td>{{this.report_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td><button id="button" onclick="deleteEmployeeBlotter({{this.employee_report_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+    <script src="./js/delete_employee_blotters.js"></script>
+
+{{! ------------------ FORM TO ADD BLOTTER ASSIGNMENT ------------------------------}}
+{{!-- Form to assign employees to blotter reports--}}
+<div class="divs" id="div1">
+    <form id="add-employee_blotter-form">
+        <h3 style="font-weight: normal;"><strong>Add Blotter assignments</strong><br><div style="font-size: 14px;">Select a Blotter report and employee to assign</div></h3>
+            {{! --- Dropdown lets user choose from blotter report number}}
+            <label> Blotter Report ID </label> 
+            <select id="add-report_id" name="report id">
+                <option value="">Select Blotter Report</option>
+                {{#each report}}
+                <option value="{{this.report_id}}">{{this.report_id}}</option>
+                {{/each}}  
+            </select>
+            <br><br>
+            <label> Employee Name </label> 
+            <select id="add-employee_id" name="employee id">
+                <option value="">Select Employee</option>
+                {{! --- Dropdown lets user choose which employee to assign}}
+                <option value= " ">None</option>
+                {{#each employees}}
+                <option value="{{this.employee_id}}">{{this.first_name}} {{this.last_name}}</option>
+                {{/each}}  
+            </select>
+            <br><br>
+        <input type="submit" class="btn" id="add-employee_blotter" value="Submit">
+    </form>
+    <script src="./js/add_employee_blotters.js"></script>
+</div>
+<br>
+ {{! ------------------ FORM TO UPDATE BLOTTER REPORTS ------------------------------}}
+<div style="margin-left: 370px; margin-top: -18px;">
+    <form id="update-employee_blotter-form">
+        <h3 style="font-weight: normal">
+            <strong>Update Employee Assignment
+            </strong><br><div style="font-size: 14px;">Select an assignment to update</div>
+        </h3>
+        <label>Assignment ID</label>
+        <select id="update-employee_report_id" name="update-employee_report_id">
+            {{! --- Dropdown lets user choose which report to update}}
+            <option value="">Select Assignment ID</option>
+            {{#each data}}
+            <option value="{{this.employee_report_id}}">{{this.employee_report_id}}</option>
+            {{/each}} 
+        </select>
+        <br>
+        <br>
+        <label>Employee Name</label>
+        <select id="update-employee_id" name="update-employee_id">
+            {{! --- Dropdown lets user choose which employee to update}}
+            <option value="">Select Employee</option>
+            <option value= " ">None</option>
+            {{#each employees}}
+            <option value="{{this.employee_id}}">{{this.first_name}} {{this.last_name}}</option>
+            {{/each}}  
+        </select>
+        <br>
+        <br>
+    <input type="submit" class="btn" id="updateEmployeeAssignment" value="Submit">
+    </form>
+</div>
+<script src="./js/update_employee_blotters.js"></script>
+
+

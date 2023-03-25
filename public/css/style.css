@@ -1,0 +1,67 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    color: #3D707A;
+    margin-bottom: '200px';
+    background-color: #E6E2DD;
+}
+
+h1 {
+    border: 4px solid #FF6E31;
+    text-align: center;
+    width: 25%;
+}
+
+#search {
+    width: 23%;
+}
+
+input {
+    background-color: #FFCFCE;
+}
+
+table, th, tr, td{
+    border:1px solid black;
+    padding: 5px;
+    width: 20%;
+}
+
+th {
+    width: 300%;
+}
+
+li {
+	display:block;
+	width:100px;
+	float:left;
+}
+
+li a {
+	display:block;
+}
+
+a {
+    color:#62009e;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#div2 {
+    padding-left: 8%;
+}
+
+.divs {
+    float: left;    
+}
+
+#button {
+    font-weight: bold;
+    font-size: 16px;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: #069;
+    width: 75px;;
+    text-decoration: none;
+    cursor: pointer;
+    color:#62009e;
+}

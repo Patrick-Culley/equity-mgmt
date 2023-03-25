@@ -1,0 +1,98 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2023--}}
+{{! -- Originality: Adapted using different attributes, variable names, comments --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<h1>Employees</h1>
+<h3>View all active Employees. <br>
+<span style="font-size: 16px; font-weight: normal">Add, update, and delete Employees from the options below.</span></h3>
+{{! ------------------ DISPLAY TABLE OF EMPLOYEES ------------------------------}}
+{{!-- Displays table of all employees --}}
+<table id="employee-table">
+    <thead>
+        {{!--- Hardcode headers to be more user-friendly---}}
+        <tr>
+            <th>Employee&nbspID</th>
+            <th>First&nbspName</th>
+            <th>Last&nbspName</th>
+            <th>Last&nbspUpdated</th>
+            <th>Date&nbspAdded</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{! -- Display employee data using SQL query upon page load}}
+        {{! -- Row identified by employee_id}}
+        {{#each data}}
+        <tr data-value={{this.employee_id}}>
+            <td>{{this.employee_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.last_update}}</td>
+            <td>{{this.added}}</td>
+            {{!-- final cell contains deleteemployee() function included in delete_employee.js --}}
+            <td><button id="button" onclick="deleteemployee({{this.employee_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{! ------------------ END OF TABLE --------------------------}}
+
+<pre>
+    {{planet_map}}
+</pre>
+
+{{! ------------------ SUBMIT FORM DATA ------------------------------}}
+{{!-- Form to add an employee record to the table (no dropdown) --}}
+<div class="divs" id="div1" style="margin-top: -30px">
+<h3>Add an Employee</h3>
+<p>To add a new employee please enter their <br> information below and click 'Submit'!</p>
+<h4 style="font-weight: normal;"><strong>Note:</strong><span style="font-size: 16px;"> Fields with an *asterik are required </span></h4>
+<form id="add-employee-form-ajax">
+    {{!-- Gather first name --}}
+    <label for="input-first_name">First Name: </label><br>
+    <input type="text" name="input-first_name" id="input-first_name-jax" required><span style="padding-left: 5px">*</span><br><br>
+    {{!-- Gather last name --}}
+    <label for="input-last_name">Last Name: </label><br>
+    <input type="text" name="input-last_name" id="input-last_name-jax" required><span style="padding-left: 5px">*</span><br><br>
+    {{!-- Gather last update --}}
+    <label for="input-last_update">Last Update: </label><br>
+    <input type="date" name="input-last_update" id="input-last_update-jax"><span style="padding-left: 5px">*</span><br><br>
+    {{!-- Gather date added --}}
+    <label for="input-added">Added: </label><br>
+    <input type="date" name="input-added" id="input-added-jax"><span style="padding-left: 5px">*</span><br><br>
+    <input type="submit" style="width: 100px; height: 30px; margin-bottom: 10px;">
+</form>
+</div>
+{{! ------------------ UPDATE FORM DATA ------------------------------}}
+<div style="margin-top: -15px; padding-left: 350px;">
+<h3>Update an Employee</h3>
+<p>To update a specific employee select their name<br> from the drop-down to update the provided fields</p>
+{{!-- Form to update Employee info. Includes dropdown for employee name --}}
+<h4 style="font-weight: normal;"><strong>Note:</strong><span style="font-size: 16px;"> Fields with an *asterik are required </span></h4>
+
+<form id="update-employee-form-ajax">
+    <label for="input-mySelect">Full name: </label>
+    <select name="input-mySelect" id="mySelect">
+        {{!-- Dropdown includes emplyee name --}}
+        <option value="test">Select a employee</option>
+        {{#each data}}
+        <option value="{{this.employee_id}}">{{this.first_name}} {{this.last_name}}</option>
+        {{/each}}
+    </select><span style="padding-left: 5px">*</span><br><br>
+    {{!-- Update options include first and last name, and date last updated --}}
+    <label for="input-first_name">First Name: </label><br>
+    <input type="text" name="input-first_name" id="input-first_name-update" required><span style="padding-left: 5px">*</span><br><br>
+    {{!-- Last name input --}}
+    <label for="input-last_name">Last Name: </label><br>
+    <input type="text" name="input-last_name" id="input-last_name-update" required><span style="padding-left: 5px">*</span><br><br>
+    {{!-- Last update input --}}
+    <label for="input-update">Last Updated: </label><br>
+    <input type="date" name="input-last_update" id="input-last_update-update" required><span style="padding-left: 5px">*</span><br><br>
+    <input type="submit" value="submit" style="width: 100px; height: 30px;">
+</form>
+</div>
+<script src="./js/add_employee.js"></script>
+<script src="./js/update_employee.js"></script>
+<script src="./js/delete_employee.js"></script>

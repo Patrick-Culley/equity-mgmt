@@ -1,0 +1,87 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2022--}}
+{{! -- Originality: Adapted using different attributes & variable names --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+<h1>Vendors</h1>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<h3 style="font-size: 18px;"><strong>Vendor Partner List:</strong> 
+<span style="font-size: 16px; font-weight: normal;">Here you may view current vendors and add, update, or delete a Vendor</span></h3>
+{{! ------------------------------DISPLAY VENDOR TABLE ----------------}}
+<table id="vendor-table">
+    <thead>
+        {{! Print headers representing the table keys}}
+        <tr>
+            <th>Vendor&nbspID</th>
+            <th style="padding-right: 100px;">Vendor&nbspName</th>
+            <th style="padding-right: 200px;">Website</th>
+            <th>Phone&nbspNumber</th>
+            {{!--includes delete column --}}
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Print all Vendor attributes for each row of the table --}}
+        {{! -- Uses deletevendor() function to delete }}
+        {{#each data}}
+        <tr data-value={{this.vendor_id}}>
+            <td>{{this.vendor_id}}</td>
+            <td>{{this.vendor_name}}</td>
+            <td>{{this.website}}</td>
+            <td>{{this.phone}}</td>       
+            <td><button id="button" onclick="deletevendor({{this.vendor_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{!--------------------------------- FORM TO ADD VENDOR ------------------------}}
+    {{!-- Gather data from form to send back to backend --}}
+<div class="divs" id="div1">
+    <form id="add-vendor-form-ajax" >
+        <h3 style="font-weight: normal"><strong>Add Vendor:</strong>
+        <span style="font-weight: normal; font-size: 16px;">Add a vendor below using <br>the required fields and click "submit".
+        <br><br><strong>Note: </strong> Fields with an *asterik are required</span></h3>
+        {{!-- <fieldset class="fields"> --}}
+        {{!-- Gather vendor name --}}
+        <label for="input-vendor_name"> Vendor Name </label><br>
+        <input type="text" name="input-vendor_name" id="input-vendor_name-ajax" style="margin-right: 5px;" required><span style="padding-left: 5px">*</span><br><br>
+        {{!-- Gather website name --}}
+        <label for="input-website"> Vendor Website: </label> <br>
+        <input type="text" name="input-website" id="input-website-ajax" style="margin-right: 5px;"><span style="padding-left: 5px">*</span><br><br>
+        {{!-- Gather phone number --}}
+        <label for="phone"> Phone Number: </label> <br>
+        <input type="text" name="input-phone" id="input-phone-ajax" style="margin-right: 5px;" placeholder="Enter 10 digit number" required><span style="padding-left: 5px">*</span>
+        {{!-- </fieldset> --}}
+        <p>
+        <input class="btn" type="submit" value="Submit"></p>
+	</form>
+</div>
+{{!------------------------------UPDATE VENDOR FORM ----------------------------}}
+    <form id="update-vendor-form-ajax" style="padding-top: 1px; padding-left: 400px;">
+        <h3 style="font-weight: normal"><strong>Update Vendor:</strong>
+        <span style="font-weight: normal; font-size: 16px;">Update a vendor below using <br>the required fields and click "submit".
+        <br><br><strong>Note: </strong> Fields with an *asterik are required</span></h3>
+        {{!-- <fieldset class="fields"> --}}
+        <label for="input-mySelect">Vendor</label>
+        {{!--- Dropdown includes selection of vendor name ----------}}
+        <select name="input-mySelect" id="mySelect">
+            <option value="test">Select a vendor</option>
+            {{#each data}}
+            <option value="{{this.vendor_id}}">{{this.vendor_name}}</option>
+            {{/each}}
+        </select><span style="padding-left: 5px">*</span><br><br>
+        {{!------- Gather vendor name as text input ---------}}
+        <label for="input-vendor_name">Vendor Name: </label><br>
+        <input type="text" name="input-vendor_name" id="input-vendor_name-update" required><span style="padding-left: 5px">*</span><br><br>
+        {{!------- Gather website name as text input ---------}}
+        <label for="input-website">Website: </label><br>
+        <input type="text" name="input-website" id="input-website-update" required><span style="padding-left: 5px">*</span><br><br>
+        {{!------- Gather phone number as text input ---------}}
+        <label for="input-phone">Phone Number: </label><br>
+        <input type="text" name="input-phone" id="input-phone-update" placeholder="Enter 10 digit number" required><span style="padding-left: 5px">*</span><br><br>
+        {{!-- </fieldset> --}}
+        <input value="Submit" type="submit"></p>    
+    </form> 
+<script src="./js/add_vendor.js"></script>
+<script src="./js/update_vendor.js"></script>
+<script src="./js/delete_vendor.js"></script>

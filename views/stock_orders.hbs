@@ -1,0 +1,153 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2023--}}
+{{! -- Originality: Adapted using different attributes & variable names --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+<h1>Stock Orders</h1>
+<h3 style="font-size: 16px;">Here you may create a stock order or update/delete current orders
+    <br><span style="font-weight: normal">*Select from stocks currently available in the Stocks inventory
+    </span>
+</h3>
+{{!-- Table to display data from DB --}}
+<table id="stock-orders-table">
+    <thead>
+        {{!-- Hardcore header names to be more user-friendly --}}
+        <tr>
+            <th>Order&nbspNumber</th>
+            <th>Customer&nbspID</th>
+            <th>Vendor&nbspID</th>
+            <th>Stock&nbspTicker</th>
+            <th>Quantity</th>
+            <th>Unit&nbspPrice</th>
+            <th>Transaction&nbspTotal</th>
+            <th>Transaction&nbspType</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- For each row, print all stock order attributes --------}}
+        {{#each data}}
+        <tr data-value={{this.order_num}}>
+            <td>{{this.order_num}}</td>
+            <td>{{this.cust_id}}</td>
+            <td>{{this.vendor_id}}</td>
+            <td>{{this.stock_ticker}}</td>
+            <td>{{this.quantity}}</td>    
+            <td>{{this.unit_price}}</td>       
+            <td>{{this.transaction_total}}</td>
+            <td>{{this.transaction_type}}</td>       
+            {{!-- Delete button included: calls deletestockorder() to delete --}}
+            <td><button id="button" onclick="deletestockorder({{this.order_num}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+      {{! ---------- Add Stock Order Form------------------------ }}
+      <div class="divs" id="div1">
+        <h4 style="font-weight: normal;"><strong style="font-size: 16px;">Create Order: </strong>To create an order enter the information below<br> and click 'Submit'.
+        You may add a unique stock not already available<br> in the Stock inventory<strong><br><br>Note:</strong> Fields with an *asterik are required</h4></h4>
+        <form id="input-stock-order">
+            {{! -------- Populate dropdowns with Vendor and Customer name ----------}}
+            <label for="dropdown-customer" style="padding-right:5px ">Customers:</label>
+            {{!-- Customers ---}}
+            <select name="input-dropdown-customer" id="dropdown-customer">
+                <option value="">Select customer</option>
+                {{#each cust}}
+                <option value="{{this.cust_id}}">{{this.first_name}} {{this.last_name}}</option>
+                {{/each}}
+            </select><span style="padding-left: 5px">*</span>
+            <br><br>  
+            <label for="dropdown-vendor" style="padding-right:23px">Vendors:</label>
+            {{!-- Vendors --}}
+            <select name="input-dropdown-vendor" id="dropdown-vendor">
+                <option value="">Select vendor</option>
+                {{#each brokers}}
+                <option value="{{this.vendor_id}}">{{this.vendor_id}}&nbsp;{{this.vendor_name}}</option>
+                {{/each}}
+            </select><span style="padding-left: 5px">*</span>
+            <br></br>
+            <label for="dropdown-ticker" style="padding-right:23px">Ticker:</label>
+            {{!-- Tickers ---}}
+            <select name="input-dropdown-ticker" id="dropdown-ticker">
+                <option value="">Select ticker</option>
+                {{#each stock}}
+                <option value="{{this.stock_ticker}}">{{this.stock_ticker}}</option>
+                {{/each}}
+            </select><span style="padding-left: 5px">*</span>
+            <br></br>
+
+            {{!------Input field to add stock order -------------}}
+            <label for="quantity">Quantity:</label>
+            <br>
+            <input type="number" id="quantity" required><span style="padding-left: 5px">*</span>
+            <br><br>
+            <label for="unitprice">Unit Price:</label>
+            <br>
+            <input type="number" id="unitprice" step="0.00" placeholder="0.00" required><span style="padding-left: 5px">*</span>
+            <br><br>
+            <label for="total">Total:</label>
+            <br>
+            <input type="number" id="total" step="0.00" placeholder="0.00" required><span style="padding-left: 5px">*</span>
+            <br><br>
+            <label for="trans-type">Transaction type:</label>
+            <br>
+            <input type="text" id="trans-type" placeholder="buy/sell/limit buy/limit sell" required><span style="padding-left: 5px">*</span>
+            <br><br>
+            <input type="submit">
+        </form>
+      </div>    
+<div class="divs" id="div2">
+<h4 style="font-weight: normal;"><strong style="font-size: 16px;">Update Order: </strong>To update orders choose from the order, <br> ticker, and vendor
+from the dropdowns. Input the required<br> fields and click "submit".
+<br><br><strong>Note:</strong> Fields with an *asterik are required</h4></h4>
+{{!-- Form to update stock orders, includes dropdown---}}
+<form id="update-order-form" style="inline-block;">
+    <label for="drop-down-order">Order Number: </label>
+    {{!-- Select stock order from dropdown --}}
+    <select name="input-order" id="drop-update-order">
+        <option value="test">Select an order</option>
+        {{#each data}}
+            <option value="{{this.order_num}}">{{this.order_num}}</option>
+        {{/each}}
+    </select><span style="padding-left: 5px">*</span>
+    <br><br>
+    {{!-- Enter remaining fields --}}
+    <label for="updateticker">Ticker: </label>
+    <select name="input-order" id="drop-update-ticker">
+        <option value="test">Select a ticker</option>
+        {{#each stock}}
+            <option value="{{this.stock_ticker}}">{{this.stock_ticker}}</option>
+        {{/each}}
+    </select><span style="padding-left: 5px">*</span>
+    <br> <br> 
+    <label for="updatevendor">Vendor: </label>
+    <select name="input-order" id="drop-update-vendor">
+        <option value="test">Select a Vendor</option>
+        {{#each brokers}}
+            <option value="{{this.vendor_id}}">{{this.vendor_id}}&nbsp;{{this.vendor_name}}</option>
+        {{/each}}
+    </select><span style="padding-left: 5px">*</span>
+    <br> <br> 
+    <label for="updateQuantity">Quantity: </label>
+    <br>
+    <input type="number" name="quantity" id="updateQuantity" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="updatePrice">Unit Price: </label>
+    <br>
+    <input type="number" name="price" id="updatePrice" step=0.01 placeholder="0.00" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="updateTotal">Total: </label>
+    <br>
+    <input type="number" name="total" step=0.01 placeholder="0.00" id="updateTotal" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <label for="updateType">Type: </label>
+    <br>
+    <input type="text" name="type" placeholder="buy/sell/limit buy/limit sell" id="updateType" required><span style="padding-left: 5px">*</span>
+    <br><br>
+    <input type="submit">
+    <br><br>
+</form>
+</div>
+<script src="./js/add-stock-order.js"></script>
+<script src="./js/delete_stock_order.js"></script>
+<script src="./js/update_order.js"></script>

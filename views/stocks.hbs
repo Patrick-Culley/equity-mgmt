@@ -1,0 +1,83 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2023--}}
+{{! -- Originality: Adapted using different attributes & variable names --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+<h1><strong>Stocks List</strong></h1>
+<h3>Inventory of unique Stocks available to order</h3>
+<h4 style="margin-top: -18px;">- Here you may add, update, and delete individual stocks</h4>
+<p>Input a unique stock to add to the inventory at your price<br>
+All stocks are currently available to add to customer stock orders
+<br>Stock Prices listed are weighed against a customer's stock order bid</p>
+</p>
+<div id="stocks">
+<table id="stocks-table">
+    <thead>
+        {{!-- Hardcode header names to be more user-friendly --}}
+        <tr>
+            <th>Stock&nbspTicker</th>
+            <th style="padding-right:100px;">Company&nbspName</th>
+            <th>Exchange&nbspName</th>
+            <th style="padding-right: 40px;">Price</th>
+            <th style="padding-right: 35px;">As&nbspof&nbspDate</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Display the ticker, company name, exchange, price, and as-of-date --}}
+        {{!-- Contains the delete button for each row which uses deleteStock() function--}}
+        {{#each data}}
+        <tr data-value={{this.stock_ticker}}>
+            <td>{{this.stock_ticker}}</td>
+            <td>{{this.company_name}}</td>
+            <td>{{this.exchange_name}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.as_of_date}}</td>       
+            <td><button id="button" onclick="deleteStock('{{this.stock_ticker}}')">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+<h4 style="font-weight: normal; font-size: 16px;"><strong>Add Stock:</strong>Enter a unique stock below <br>which does not currently exist. Input the <br>required fields and click "submit" to add<br> to inventory
+<br><br><strong>Note:</strong> Fields with an *asterik are required</h4>
+{{!-- form in which to gather data--}}
+{{!-- includes ticker, company name, exchange, price, and date --}}
+<div class="divs" id="div1">
+<form id = "add-stock-form">
+    <label for="add_stock">Ticker </label><br>
+    <input type="text" id="ticker"><span style="padding-left: 5px">*</span><br><br>
+    <label for="company">Company Name </label><br>
+    <input type="text" id="company"><span style="padding-left: 5px">*</span><br><br>
+    <label for="exchange">Exchange</label><br>
+    <input type="text" id="exchange" placeholder="NYSE/NASDAQ"><span style="padding-left: 5px">*</span><br><br>
+    <label for="price">Price </label><br>
+    <input type="number" id="price" step=0.01 placeholder="000.00"><span style="padding-left: 5px">*</span><br><br>
+    <label for="date">As Of Date </label><br>
+    <input type="date" id="date"><span style="padding-left: 5px">*</span><br><br>
+    <input type="submit" style="font-weight: bold; width: 100px; height: 30px;">
+</form>
+</div>
+<div class="divs" id="div2" style="margin-top: -155px; margin-left: 75px">
+<h4 style="font-weight: normal;"><strong style="font-size: 16px;">Update Stock: </strong>To update choose a stock from the dropdown<br>and enter the required data, and click 'Submit'
+<br><br><strong>Note:</strong> Fields with an *asterik are required</h4>
+<form id="update-stock-form">
+        <label for="dropdown-ticker" style="padding-right:5px">Ticker:</label>
+        <select name="dropdown-ticker" id="dropdown-ticker">
+        <option value="test">Select a stock</option>
+        {{!-- Dynamic dropdown displays the stock_ticker referencing Stocks--}}
+        {{#each data}}
+        <option value="{{this.stock_ticker}}">{{this.stock_ticker}}</option>
+        {{/each}}
+    </select><span style="padding-left: 5px">*</span><br><br>
+    <label for="update-price">Price: </label><br>
+    <input type="number" id="update-price" step=0.01 placeholder="000.00"><span style="padding-left: 5px">*</span><br><br>
+    <label for="update-date">Date: </label><br>
+    <input type="date" id="update-date"><span style="padding-left: 5px">*</span><br><br>
+    <input type="submit" style="font-weight: bold; width: 100px; height: 30px;">
+</form>
+</div>
+{{!-- Includes JS files to add, update, and delete --}}
+<script src="./js/add_stock_to_stocks.js"></script>
+<script src="./js/delete_stock_from_stocks.js"></script>
+<script src="./js/update_stock.js"></script>

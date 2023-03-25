@@ -1,0 +1,100 @@
+{{! -- Citation Scope: Displaying data in handlebars and adding form and dynamic dropdown --}}
+{{! -- Date: 3/9/2023--}}
+{{! -- Originality: Adapted using different attributes & variable names --}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data--}}
+{{! -- Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<h1>Blotters</h1>
+<h3 style="font-size: 20px"><strong>Trade Blotter Reports<br></strong><span style="font-size: 16px; font-weight: normal;">  Here you may create reports for analysis for 
+     fees associated <br>with a stock order by comparing an order with a report<br>*Reports can be assigned to employees under the Employees Blotter page</span></h3>
+<table id="blotter-table">
+    <thead>
+        {{!-- Hardcode reader friendly names as headers for the table  --}}
+        <tr>
+            <th>Report&nbspID</th>  
+            <th>Stock&nbspOrder&nbspNumber</th>
+            <th>Settle&nbspDate</th>
+            <th>Trade&nbspType</th>
+            <th>Fees</th>
+            <th>Net&nbspProceeds</th>
+            <th>Delete</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Print all report attributes for each row of the table --}}
+        {{#each data}}
+        <tr data-value={{this.report_id}}>
+            <td>{{this.report_id}}</td>
+            <td>{{this.order_num}}</td>
+            <td>{{this.settle_date}}</td>
+            <td>{{this.trade_type}}</td>
+            <td>{{this.fees}}</td>
+            <td>{{this.net_proceed}}</td>
+            <td><button id="button" onclick="deleteBlotter({{this.report_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>  
+{{! ------------------ FORM TO ADD BLOTTER REPORT ------------------------------}}
+{{!-- Form to add Blotter report to Blotters Table--}}
+<div class="divs" id="div1">
+<h4 style="font-weight: normal;"><strong style="font-size: 18px;">Create a Blotter Report: </strong>To create a new report<br>select a stock order number, enter 
+the required fields<br> and click 'Submit'
+<br><br><strong>Note:</strong> Fields with an *asterik are required</h4>
+<form id="add-blotter-form-ajax">
+    <label for="input_order_num">Order Number:</label> 
+    {{! --- Dropdown lets user choose from stock order number}}
+    <select name="input_order_num" id="mySelect" style="margin-right: 10px;">
+        {{#each data}}
+        <option value ="{{this.order_num}}">{{this.order_num}}</option>
+        {{/each}}
+    </select><br><br>
+    <label> Settlement Date  </label> <br>
+    <input type="date" name="input-settlement" id="input-settlement-ajax" required><span style="padding-left: 5px">*</span><br><br>
+    
+    <label> Select Trade Type </label><br>
+    <input type="text" name="input-trade_type" id="input-trade_type-ajax" placeholder="Buy/Sell/Limit"style="margin-right: 10px;" placeholder="Buy/Sell, Limit Buy/Sell" required><span style="padding-left: 5px">*</span><br><br>
+
+    <label> Fees </label><br>
+    <input style="margin-right: 5px;" type="text" placeholder="0.00" name="input-fees" id="input-fees-ajax" required><span style="padding-left: 5px">*</span><br><br>
+
+    <label> Net Proceeds </label><br>
+    <input type="text" name="input-net_proceed" placeholder="0.00" id="input-net_proceed-ajax" required><span style="padding-left: 5px">*</span><br><br>
+    <input class="button" type="submit" id="createblotter" value="Create blotter"><br>
+</form>
+</div>
+{{! ------------------ FORM TO UPDATE BLOTTER REPORTS ------------------------------}}
+<div style="margin-left: 400px;">
+<h4 style="font-weight: normal;"><strong style="font-size: 18px;">Update a Blotter Report:</strong>
+To update<br> an existing blotter, select the blotter report id.<br>Then enter the required fields and 
+press "submit".
+<br><br><strong>Note:</strong> Fields with an *asterik are required</h4>
+<form id="update-blotter-form">
+    <label for="input-mySelect">Report ID: </label>
+    <select name="input-mySelect" id="test1">
+        <option value="test">Select a report</option>
+        {{!-- Dynamic Dropdown lets user choose from report id--}}
+        {{#each data}}
+            <option value="{{this.report_id}}">{{this.report_id}}</option>
+        {{/each}}
+    </select>
+    <br><br>
+        <label>Settlement Date </label><br>
+        <input type="date" name="settle_date" id="updateSettle"><span style="padding-left: 5px">*</span><br><br>
+
+        <label>Trade Type </label><br>
+        <input type="text" name="trade_type" placeholder="Buy/Sell/Limit" id="updateType"><span style="padding-left: 5px">*</span><br><br>
+
+        <label>Fees </label><br>
+        <input type="text" name="fees" id="updateFees" placeholder="0.00"><span style="padding-left: 5px">*</span><br><br>
+
+        <label>Net Proceeds </label><br>
+        <input type="text" name="net_proceed" id="updateProceed" placeholder="0.00"><span style="padding-left: 5px">*</span><br><br>
+    <input type="submit" value="Update"> 
+</form>
+</div>
+<script src="./js/add_blotter.js"></script>
+<script src="./js/delete_blotter.js"></script>
+<script src="./js/update_blotters.js"></script>
