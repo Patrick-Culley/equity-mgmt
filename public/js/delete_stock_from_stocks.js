@@ -1,7 +1,3 @@
-// Citation Scope: Deleting rows to html table 
-// Date: 3/9/2023
-// Originality: Copied from Part B, Step 7 of node starter app module. Changed attribute and function name. Function is now deleteStock(). 
-// Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 // deleteStock function deletes a Stock row 
 // Passed the ticker symbol to identify row

@@ -1,7 +1,3 @@
-// Citation Scope: Deleting data rows from an html table 
-// Date: 3/9/2023
-// Originality: Copied from Part B, Step 7 of node starter app module. Changed function name: deletestockorder(). 
-// Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 // deletestockorder function deletes a Stock order row 
 // Passed the order number to identify and delete row

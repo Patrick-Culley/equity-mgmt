@@ -1,9 +1,3 @@
-/*
-Citation Scope: Updating from html form and updating table using Javascript & AJAX 
-Date 3/9/2023
-Originality: Adapted from Step 8. Uses different element ids, field numbers, & variable names. Uses location.reload()
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
 
 // Grab HTML form element to be used to update individual stock info
 let updatevendorForm = document.getElementById('update-vendor-form-ajax');

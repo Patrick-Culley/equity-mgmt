@@ -1,7 +1,3 @@
-// Citation Scope: Gathering data from form and adding rows to html table 
-// Date: 3/9/2023
-// Originality: Adapted using different element ids, field numbers, & variable names 
-// Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
 // Grab HTML form element to be used to submit stock info
 let addemployeeForm = document.getElementById('add-employee_blotter-form');

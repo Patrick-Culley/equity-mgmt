@@ -1,7 +1,3 @@
-// Citation Scope: Deleting rows data from html table 
-// Date: 3/9/2023
-// Originality: Copied from Part A, Step 7 of node starter app module. Changed function name: deleteEmployeeBlotter(). 
-// Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 // function deletes blotter assignments from EmployeesHasBlotters 
 function deleteEmployeeBlotter(employee_report_id) {

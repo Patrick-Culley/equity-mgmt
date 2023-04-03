@@ -1,9 +1,4 @@
-/*
-Citation Scope: Gathering data from form and updating table using Javascript & AJAX 
-Date 3/9/2023
-Originality: Adapted from step 8 using different element ids, fields numbers, & variable names. Uses location.reload().
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 // Grab HTML form element to be used to submit employee info
 let updateemployeeForm = document.getElementById('update-employee-form-ajax');
 

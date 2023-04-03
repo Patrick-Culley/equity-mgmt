@@ -1,9 +1,4 @@
-/*
-Citation Scope: Updating from html form and updating table using Javascript & AJAX 
-Date 3/9/2023
-Originality: Adapted from Step 8. Removed updateRow() function and uses different element ids, field numbers, & variable names.
-Source: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
-*/
+
 // Grab HTML form element to be used to update blotter report
 let updateOrderForm = document.getElementById('update-blotter-form');
 
