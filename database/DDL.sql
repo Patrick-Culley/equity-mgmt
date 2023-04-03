@@ -1,14 +1,9 @@
--- -----------------------------------------------------
--- Project Group 53: Equity Express 
--- Ray Zhao
--- Patrick Culley
--- -----------------------------------------------------
 
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
 -- -------------- Customers Table ----------------------
-CREATE TABLE Customers (
+CREATE OR REPLACE TABLE Customers (
     cust_id INT(30) NOT NULL AUTO_INCREMENT,    -- added auto-increment so we aren't manually inputting customer id
     first_name VARCHAR(45) NOT NULL, 
     last_name VARCHAR(45) NOT NULL, 
@@ -27,7 +22,7 @@ VALUES ('Chris', 'Chuckles', 'haha@gmail.com', '123 comedy ln', 34000),
     ('Emily', 'Rose', 'e_rose@gmail.com', '1254 eastfield ct', 90000);
 
 -- ------------- Employees Table ----------------------
-CREATE TABLE Employees (
+CREATE OR REPLACE TABLE Employees (
     employee_id INT(30) AUTO_INCREMENT,
     first_name VARCHAR(45) NOT NULL, 
     last_name VARCHAR(45) NOT NULL,
@@ -46,7 +41,7 @@ VALUES ('Ray', 'Mond','2023-02-08', '2021-10-12'),
 
 
 -- ------------- VendorBrokers Table ----------------------
-CREATE TABLE VendorBrokers (
+CREATE OR REPLACE VendorBrokers (
     vendor_id INT AUTO_INCREMENT NOT NULL,
     vendor_name VARCHAR(45) NOT NULL, 
     website VARCHAR(255), 
@@ -63,7 +58,7 @@ VALUES ('Charles Schwab', 'www.schwab.com','8002238787'),
     ('TDAmeritrade', 'www.tdameritrade.com', '8774922057');
 
 -- ------------- Stocks Table ----------------------
-CREATE TABLE Stocks (
+CREATE OR REPLACE TABLE Stocks (
 	stock_ticker VARCHAR(10) NOT NULL PRIMARY KEY,
     company_name VARCHAR(255) NOT NULL,
     exchange_name VARCHAR(45) NOT NULL,
@@ -80,7 +75,7 @@ VALUES('PLTR', 'Palantir', 'NYSE', 8.25, '2022-02-07'),
     ('PEP', 'PepsiCo', 'NYSE', 71.20, '2022-02-08');
 
 -- ------------- StockOrders Table ----------------------
-CREATE TABLE StockOrders (
+CREATE OR REPLACE TABLE StockOrders (
 	order_num INT(30) AUTO_INCREMENT NOT NULL PRIMARY KEY,
     cust_id INT(45) NOT NULL,
     vendor_id INT(45) NOT NULL,
@@ -103,7 +98,7 @@ INSERT INTO StockOrders (cust_id, vendor_id, stock_ticker, quantity, unit_price,
 
 
 -- ------------- Blotters Table ----------------------
-CREATE TABLE Blotters (
+CREATE OR REPLACE TABLE Blotters (
     report_id INT(45) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     order_num INT NOT NULL, 
     settle_date VARCHAR(10) NOT NULL, 
@@ -123,7 +118,7 @@ VALUES (1, 1, '2022-02-08', 'buy', 3.00, 168.00),
     
     
 -- ------------- EmployeesHasBlotters (intersection) Table ----------------------
-CREATE TABLE EmployeesHasBlotters (
+CREATE OR REPLACE TABLE EmployeesHasBlotters (
     employee_report_id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     emp_id INT(30),
     r_id INT(45) NOT NULL,
