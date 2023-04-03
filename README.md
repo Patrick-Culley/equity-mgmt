@@ -1,2 +1,2 @@
-# equity-mgmt
-Equity Management Database created with SQL and JavaScript
+# Equity Management Database Application
+Equity Management Database created with SQL and JavaScript 
