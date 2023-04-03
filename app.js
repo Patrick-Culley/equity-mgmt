@@ -1,4 +1,3 @@
-// Setup express and AJAX for routing 
 // Use Express framework for creating object for routing 
 var express = require('express');    
 var app = express();             
