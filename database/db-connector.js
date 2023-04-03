@@ -4,10 +4,10 @@ var mysql = require('mysql')
 // Uses credentials to establish and maintain a DB connection 
 var pool = mysql.createPool({
     connectionLimit : 10,
-    host            : 'classmysql.engr.oregonstate.edu',
-    user            : 'your username',
-    password        : 'your password',
-    database        : 'cs340_culleyp'
+    host            : 'hostname',
+    user            : 'your_username',
+    password        : 'your_password',
+    database        : 'your_DB'
 })
 
 // To be used in app.js 
