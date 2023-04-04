@@ -41,7 +41,7 @@ VALUES ('Ray', 'Mond','2023-02-08', '2021-10-12'),
 
 
 -- ------------- VendorBrokers Table ----------------------
-CREATE OR REPLACE VendorBrokers (
+CREATE OR REPLACE TABLE VendorBrokers (
     vendor_id INT AUTO_INCREMENT NOT NULL,
     vendor_name VARCHAR(45) NOT NULL, 
     website VARCHAR(255), 
