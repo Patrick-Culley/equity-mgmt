@@ -1,5 +1,5 @@
 # Equity Management Database Application
-Equity Management Database created with SQL and JavaScript. Created for admins, the application provides the following functionalities: 
+Equity Management Database created with SQL, JavaScript, Node.js, Express, and PHP. Created for admins, the application provides the following functionalities: 
 - Management of pending stock trades
 - Fee calculations
 - Customer and Employee management 
