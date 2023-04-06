@@ -6,7 +6,7 @@ Equity Management Database created with SQL, JavaScript, Node.js, Express, and P
 - Customer and Employee management 
 - Report Assignments 
 
-- More about financial blotter reports: https://www.investopedia.com/terms/b/blotter.asp
+Read more about financial blotter reports here: https://www.investopedia.com/terms/b/blotter.asp
 
 UML Diagram 
 
