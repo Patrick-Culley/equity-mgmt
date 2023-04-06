@@ -2,8 +2,11 @@
 Equity Management Database created with SQL, JavaScript, Node.js, Express, and PHP. Intended for administrators, the application provides the following functionalities: 
 - Management of pending stock trades
 - Fee calculations
+- Creation of trading records (blotter reports)
 - Customer and Employee management 
 - Report Assignments 
+
+- More about financial blotter reports: https://www.investopedia.com/terms/b/blotter.asp
 
 UML Diagram 
 
